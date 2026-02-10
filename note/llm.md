@@ -90,7 +90,7 @@ CORS_ALLOWED_ORIGINS = [
 
 ```
 在AIFriends/backend/web/urls.py中：
-```python
+```shell
 from django.urls import path
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
