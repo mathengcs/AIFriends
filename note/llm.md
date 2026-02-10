@@ -150,3 +150,17 @@ export default defineConfig({
     emptyOutDir: true,
   },
 ```
+
+Vue3
+文档：https://cn.vuejs.org/guide/quick-start
+TailWind CSS
+安装：https://tailwindcss.com/docs/installation/using-vite
+daisyUI
+安装：https://daisyui.com/docs/install/
+组件库：https://daisyui.com/components/
+Croppie
+文档：https://foliotek.github.io/Croppie/
+因为vue-croppie不支持vue3，所以直接用croppie
+课上用到的SVG图标：
+代码：https://www.acwing.com/blog/content/83396/
+ 
