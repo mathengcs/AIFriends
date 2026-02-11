@@ -14,3 +14,7 @@ python manage.py migrate
 ```
 
 
+login.py：登录。使用用户名 + 密码登录，在cookie中设置refresh_token，并返回access_token和用户信息
+register.py：注册账号。创建账号后返回refresh_token、access_token和用户信息
+logout.py：退出登录。删除cookie中的refresh_token
+refresh_token.py：使用cookie中的refresh_token刷新access_token
