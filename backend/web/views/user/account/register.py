@@ -23,13 +23,13 @@ class RegisterView(APIView):
             user = User.objects.create_user(username=username, password=password)
             user_profile = UserProfile.objects.create(user=user)
             refresh = RefreshToken.for_user(user)
-            response = ({
+            response = Response({
                 'result': 'success',
                 'access': str(refresh.access_token),
                 'user_id': user.id,
                 'username': user.username,
                 'photo': user_profile.photo.url,
-                'profile': user_profile.user.profile,
+                'profile': user_profile.profile,
             })
             response.set_cookie(
                 key='refresh_token',
@@ -41,6 +41,8 @@ class RegisterView(APIView):
             )
             return response
          except:
+            import traceback
+            print(traceback.format_exc())
             return Response({
                 'result': '系统异常，请稍后重试'
             })
