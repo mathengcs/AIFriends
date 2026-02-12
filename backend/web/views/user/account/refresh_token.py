@@ -14,8 +14,24 @@ class RefreshTokenView(APIView):
                 }, status=401)
             refresh = RefreshToken(refresh_token) # 如果refresh token 过期了，会报异常
             if settings.SIMPLE_JWT['ROTATE_REFRESH_TOKENS']:
-                pass
-
+                refresh.set_jti()
+                response = Response({
+                    'result': 'success',
+                    'access': str(refresh.access_token),
+                })
+                response.set_cookie(
+                    key='refresh_token',
+                    value=str(refresh),
+                    httponly=True,
+                    samesite='Lax',
+                    secure=True,
+                    max_age=86400 * 7,
+                )
+                return response
+            return Response({
+                'result': 'success',
+                'access': str(refresh.access_token),
+            })
         except:
             return Response({
                 'result': "refresh token 过期了"

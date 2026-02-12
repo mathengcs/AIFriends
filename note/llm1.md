@@ -9,7 +9,7 @@ npm install -g npm@latest
 
 python 3.14
 ```shell
-pip install django djangorestframework djangorestframework-simplejwt django-cors-headers
+pip install django djangorestframework djangorestframework-simplejwt django-cors-headers Pillow
 ```
 
 创建项目
