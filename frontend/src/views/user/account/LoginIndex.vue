@@ -39,7 +39,7 @@ async function handleLogin() {
       }
     }
     catch (err) {
-      console.log(err);
+
       errorMessage.value = "程序异常"
     }
 
