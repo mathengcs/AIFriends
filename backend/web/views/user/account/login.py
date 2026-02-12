@@ -17,15 +17,15 @@ class LoginView(APIView):
                 })
             user = authenticate(username=username, password=password)
             if user: #用户名 密码正确
-                user_profile = UserProfile.objects.get(username=username)
+                user_profile = UserProfile.objects.get(user=user)
                 refresh = RefreshToken.for_user(user) #生成jwt
-                response = ({
+                response = Response({
                     'result': 'success',
                     'access': str(refresh.access_token),
                     'user_id': user.id,
                     'username': user.username,
                     'photo': user_profile.photo.url,
-                    'profile': user_profile.user.profile,
+                    'profile': user_profile.profile,
                 })
                 response.set_cookie(
                     key='refresh_token',
@@ -40,6 +40,8 @@ class LoginView(APIView):
                     'result': '用户名或密码错误'
                 })
         except:
+            # import traceback
+            # print(traceback.print_exc())
             return Response({
                 'result': '系统异常，请稍后重试'
             })

@@ -1,4 +1,6 @@
 <script setup>
+const username = ref('')
+const password = ref('')
 
 </script>
 
