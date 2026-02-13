@@ -7,6 +7,10 @@ const myUsername = ref(props.username)
 watch(() => props.username, newVal => {
   myUsername.value = newVal
 })
+
+defineExpose({
+  myUsername,
+})
 </script>
 
 <template>
