@@ -15,7 +15,9 @@ defineExpose({
 </script>
 
 <template>
-
+  <fieldset class="fieldset">
+    <label for="" class="label text-base"></label>
+  </fieldset>
 </template>
 
 <style scoped>
