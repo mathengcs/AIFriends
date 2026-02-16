@@ -45,7 +45,7 @@ async  function handleUpdate() {
       }
     }
     catch (err) {
-      console.log(err)
+
     }
   }
 
