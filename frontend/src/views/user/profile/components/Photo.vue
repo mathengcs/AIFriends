@@ -28,12 +28,12 @@ async function openModal(photo) {
       enableOrientation: true,
       enforceBoundary: true,
     })
-
-    croppie.bind({  // 绑定裁剪图片
-      url: photo,
-    })
-
   }
+  croppie.bind({  // 绑定裁剪图片
+    url: photo,
+  })
+
+
 }
 
 async function crop() {
@@ -90,7 +90,7 @@ defineExpose({
       <div class="modal-action">
 
         <button @click="modalRef.close()" class="btn">取消</button>
-         <button @click="crop" class="btn btn-neutral">确定</button>
+        <button @click="crop" class="btn btn-neutral">确定</button>
       </div>
     </div>
   </dialog>

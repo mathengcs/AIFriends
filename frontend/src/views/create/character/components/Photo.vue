@@ -29,11 +29,11 @@ async function openModal(photo) {
       enableOrientation: true,
       enforceBoundary: true,
     })
-
-    croppie.bind({
-      url: photo,
-    })
   }
+  croppie.bind({
+    url: photo,
+  })
+
 }
 
 async function crop() {
