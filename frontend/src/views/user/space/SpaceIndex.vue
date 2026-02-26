@@ -76,6 +76,10 @@ onMounted(async () => {
   observer.observe(sentinelRef.value)
 })
 
+function removeCharacter(characterId) {
+  characters.value = characters.value.filter(c => c.id !== characterId)
+}
+
 onBeforeUnmount(() => {
   observer?.disconnect()
 })
@@ -90,7 +94,6 @@ onBeforeUnmount(() => {
         :key="character.id"
         :character="character"
         :canEdit="true"
-
       />
     </div>
     <div ref="sentinel-ref" class="h-2 mt-8 w-100 bg-red-500"></div>
