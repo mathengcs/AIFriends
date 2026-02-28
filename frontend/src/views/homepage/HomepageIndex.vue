@@ -1,6 +1,7 @@
 <script setup>
-import {nextTick, onMounted, ref, useTemplateRef} from "vue";
+import {nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
 import api from "@/js/http/api.js";
+import Character from "@/components/character/Character.vue";
 
 const characters = ref([])
 const isLoading = ref(false)
@@ -32,7 +33,7 @@ async function loadMore() {
       newCharacters = data.characters
     }
   } catch (err) {
-    console.log(err)
+
   } finally {
     isLoading.value = false
     if (newCharacters.length === 0) {
@@ -64,6 +65,12 @@ onMounted(async () => {
         root:null, rootMargin:'2px',threshold:0
       }
   )
+
+  observer.observe(sentinelRef.value)
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
 })
 
 </script>
@@ -71,10 +78,15 @@ onMounted(async () => {
 <template>
   <div class="flex flex-col items-center mb-12">
     <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-9 mt-12 justify-items-center w-full px-9">
+      <Character
+        v-for="character in characters"
+        :key="character.id"
+        :character="character"
 
+      />
     </div>
 
-    <div ref="sentinel-ref" class="h-2 mt-8 w-100 bg-red-500">
+    <div ref="sentinel-ref" class="h-2 mt-8 ">
 
     </div>
     <div v-if="isLoading" class="text-gray-500 mt-4">
