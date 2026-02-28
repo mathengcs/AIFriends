@@ -11,7 +11,6 @@ const emit = defineEmits(['remove'])
 const isHover = ref(false)
 
 const user = useUserStore()
-console.log(user)
 
 async function handleRemoveCharacter() {
   try {
@@ -23,7 +22,7 @@ async function handleRemoveCharacter() {
       emit('remove', props.character.id)
     }
   }catch (err) {
-    console.log(err)
+
   }
 }
 </script>

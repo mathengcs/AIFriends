@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user',() => {
         username.value = data.username;
         photo.value = data.photo;
         profile.value = data.profile;
-        console.log(photo.value)
+
     }
 
     function logout() {
