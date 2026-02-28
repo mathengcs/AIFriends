@@ -94,6 +94,7 @@ onBeforeUnmount(() => {
         :key="character.id"
         :character="character"
         :canEdit="true"
+        @remove="removeCharacter"
       />
     </div>
     <div ref="sentinel-ref" class="h-2 mt-8 w-100 bg-red-500"></div>
