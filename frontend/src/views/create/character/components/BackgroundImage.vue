@@ -1,6 +1,6 @@
 <script setup>
 
-import {onBeforeUnmount, ref, useTemplateRef, watch} from "vue";
+import {nextTick, onBeforeUnmount, ref, useTemplateRef, watch} from "vue";
 import CameraIcon from "@/views/user/profile/components/icons/CameraIcon.vue";
 import Croppie from "croppie";
 
@@ -20,7 +20,7 @@ let croppie = null
 
 async function openModal(photo) {
   modalRef.value.showModal()
-
+  await nextTick()
   if (!croppie) {
     croppie = new Croppie(croppieRef.value, {
       viewport: {width: 300, height: 500},
