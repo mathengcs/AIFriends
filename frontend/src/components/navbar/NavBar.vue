@@ -15,7 +15,9 @@ const searchQuery = ref('')
 const router = useRouter()
 const route = useRoute()
 
-watch(() => root.)
+watch(() => route.query.q, newQ => {
+  searchQuery.value = newQ || ''
+})
 
 function handleSearch() {
   router.push({
