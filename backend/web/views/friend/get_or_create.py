@@ -13,7 +13,7 @@ class GetOrCreateFriendView(APIView):
             character_id = request.data['character_id']
             user = request.user
             user_profile = UserProfile.objects.get(user=user)
-            friends = Friend.objects.filter(character_id=character_id, user=user_profile)
+            friends = Friend.objects.filter(character_id=character_id, me=user_profile)
             if friends.exists():
                 friend = friends.first()
             else:
@@ -42,6 +42,8 @@ class GetOrCreateFriendView(APIView):
                 }
             })
         except:
+            import traceback
+            print(traceback.print_exc())
             return Response({
                 'result': '系统异常，请稍后重试'
             })
