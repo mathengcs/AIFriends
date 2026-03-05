@@ -7,6 +7,7 @@ import ChatHistory from "@/components/character/chat_field/chat_history/ChatHist
 const props = defineProps(['friend'])
 const modalRef = useTemplateRef('modal-ref')
 const inputRef = useTemplateRef('input-ref')
+const chatHistoryRef = useTemplateRef('chat-history-ref')
 const history = ref([])
 
 async function showModal() {
@@ -31,10 +32,17 @@ const modalStyle = computed(() => {
 
 function handlePushBackMessage(msg) {
   history.value.push(msg)
+  chatHistoryRef.value.scrollToBottom()
 }
 
 function handleAddToLastMessage(delta) {
   history.value.at(-1).content += delta
+  chatHistoryRef.value.scrollToBottom()
+}
+
+function handlePushFrontMessage(msg) {
+  history.value.unshift(msg)
+
 }
 
 defineExpose({
@@ -49,10 +57,12 @@ defineExpose({
         ✕
       </button>
       <ChatHistory
+          ref="chat-history-ref"
           v-if="friend"
           :history="history"
           :friendId="friend.id"
           :character="friend.character"
+          @pushFrontMessage="handlePushFrontMessage"
       />
       <InputField v-if="friend"
                   ref="input-ref"
