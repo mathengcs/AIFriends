@@ -7,6 +7,7 @@ import api from "@/js/http/api.js";
 import streamApi from "@/js/http/steamApi.js";
 
 const props = defineProps(['friendId'])
+const emit = defineEmits(['pushBackMessage', 'addToLastMessage'])
 const inputRef = useTemplateRef('input-ref')
 const message = ref('')
 let isProcessing = false
@@ -23,7 +24,19 @@ async function handleSend() {
   const content = message.value.trim()
   if (!content) return
   message.value = ''
-  try{
+
+  emit('pushBackMessage', {
+    role: 'user',
+    content: content,
+    id: crypto.randomUUID()
+  })
+  emit('pushBackMessage', {
+    role: 'ai',
+    content: '',
+    id: crypto.randomUUID()
+  })
+
+  try {
     await streamApi('/api/friend/message/chat/', {
       body: {
         friend_id: props.friendId,
@@ -34,7 +47,8 @@ async function handleSend() {
         if (isDone) {
           isProcessing = false
         } else if (data.content) {
-          console.log(data.content)
+
+          emit('addToLastMessage', data.content)
         }
       },
       onerror(err) {
@@ -42,7 +56,7 @@ async function handleSend() {
       },
     })
 
-  }catch (err) {
+  } catch (err) {
     console.log(err)
     isProcessing = false
   }
@@ -64,10 +78,10 @@ defineExpose({
         placeholder="文本输入..."
     >
     <div @click="handleSend" class="absolute right-2 w-8 h-8 flex justify-center items-center cursor-pointer">
-      <SendIcon />
+      <SendIcon/>
     </div>
     <div class="absolute right-10 w-8 h-8 flex justify-center items-center cursor-pointer">
-      <MicIcon />
+      <MicIcon/>
     </div>
   </form>
 </template>
