@@ -16,7 +16,7 @@ class RemoveFriendView(APIView):
                 me__user=request.user,
             ).delete()
             return Response({
-                'result' 'success'
+                'result':'success'
             })
 
         except:
