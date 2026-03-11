@@ -45,6 +45,7 @@ urlpatterns = [
     path('api/friend/message/get_history/', GetHistoryView.as_view()),
     path('api/friend/message/asr/asr/', ASRView.as_view()),
     path('', index),
+
     re_path(r'^(?!media/|static/|assets/).*$', index)
 ]
 
